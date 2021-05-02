@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.guet.visualization_data.mapper.AreaMapper">
 
+    <select id="findByUpdateTime" resultType="edu.guet.visualization_data.entity.Area" parameterType="Date">
+        select * from
+        (select * from area WHERE updateTime &lt; #{date} order by updateTime DESC) as tmp
+        GROUP BY id;
+    </select>
+
 </mapper>
