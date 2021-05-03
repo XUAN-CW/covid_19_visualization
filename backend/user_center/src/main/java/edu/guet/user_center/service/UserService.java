@@ -12,5 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-05-03
  */
 public interface UserService extends IService<User> {
+    //登录的方法
+    String login(User member);
 
 }
