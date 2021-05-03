@@ -45,8 +45,7 @@ export const constantRoutes = [
 
   {
     path: '/',
-    component: Layout,
-    redirect: '/dashboard',
+    component: () => import('@/views/covid_19_visualization/index'),
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
