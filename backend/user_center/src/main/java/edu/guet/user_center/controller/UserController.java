@@ -3,6 +3,7 @@ package edu.guet.user_center.controller;
 
 import edu.guet.common.R;
 import edu.guet.user_center.entity.User;
+import edu.guet.user_center.entity.vo.RegisterVo;
 import edu.guet.user_center.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,16 @@ public class UserController {
             return R.error().message("登录失败！");
         } else {
             return R.ok().data("token",token);
+        }
+    }
+
+    @PostMapping("register")
+    public R registerUser(@RequestBody RegisterVo registerVo) {
+        String registerInfo = memberService.register(registerVo);
+        if("OK".equals(registerInfo)){
+            return R.ok();
+        }else {
+            return R.error().message(registerInfo);
         }
     }
 }

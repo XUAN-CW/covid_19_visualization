@@ -26,7 +26,7 @@ public class User implements Serializable {
     /**
      * 会员id
      */
-    @TableId(value = "id", type = IdType.ID_WORKER)
+    @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
     /**
