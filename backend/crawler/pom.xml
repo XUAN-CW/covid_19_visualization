@@ -7,6 +7,10 @@
         <groupId>edu.guet.covid_19_visualization</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <properties>
+        <!-- 跳过测试 -->
+        <skipTests>true</skipTests>
+    </properties>
     <artifactId>crawler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>crawler</name>
