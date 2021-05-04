@@ -2,10 +2,20 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/vue-admin-template/user/login',
+    url: '/user_center/user/login',
     method: 'post',
     data
   })
+}
+
+export default {
+  login(data) {
+    return request({
+      url: '/user_center/user/login',
+      method: 'post',
+      data
+    })
+  }
 }
 
 export function getInfo(token) {
