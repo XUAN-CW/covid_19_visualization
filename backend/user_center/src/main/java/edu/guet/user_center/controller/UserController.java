@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2021-05-03
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/user_center/user")
 public class UserController {
 
