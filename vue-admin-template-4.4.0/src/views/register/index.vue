@@ -6,45 +6,34 @@
         <h3 class="title">Register Form</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="mobile">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
+        <el-input ref="mobile" v-model="loginForm.mobile" placeholder="手机号码" name="mobile" type="text" tabindex="1" auto-complete="on" />
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input
-          :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="Password"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="handleLogin"
-        />
+        <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
         <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-form-item>
+        <el-input ref="mobile" v-model="loginForm.verificationCode" style="width:250px;" placeholder="验证码" />
+        <span style="float:right;padding-top:3px;padding-right:3px">
+          <el-button type="primary" style="width:80px;">获取</el-button>
+        </span>
+      </el-form-item>
+
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Register</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
+        <span style="margin-right:20px;">mobile: admin</span>
         <span> password: any</span>
       </div>
 
@@ -53,13 +42,13 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
+import { validmobile } from '@/utils/validate'
 
 export default {
   name: 'Register',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
+    const validatemobile = (rule, value, callback) => {
+      if (!validmobile(value)) {
         callback(new Error('Please enter the correct user name'))
       } else {
         callback()
@@ -74,11 +63,12 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        mobile: '',
+        password: '',
+        verificationCode: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        mobile: [{ required: true, trigger: 'blur', validator: validatemobile }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
@@ -88,7 +78,7 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
@@ -129,8 +119,8 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
+$bg: #283443;
+$light_gray: #fff;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -173,9 +163,9 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .login-container {
   min-height: 100%;
@@ -187,7 +177,7 @@ $light_gray:#eee;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 110px 35px 0;
     margin: 0 auto;
     overflow: hidden;
   }
