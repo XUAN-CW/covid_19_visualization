@@ -43,16 +43,23 @@ export const constantRoutes = [
     hidden: true
   },
 
+  // http://localhost:9528/#/home/dashboard
   {
-    path: '/',
+    path: '/home/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: 'home/dashboard',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
+  },
+
+  {
+    path: '/',
+    component: () => import('@/views/covid19Visualization/index'),
+    hidden: true
   },
 
   {
