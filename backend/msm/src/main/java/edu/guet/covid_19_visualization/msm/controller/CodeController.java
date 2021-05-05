@@ -1,7 +1,7 @@
 package edu.guet.covid_19_visualization.msm.controller;
 
 import edu.guet.common.R;
-import edu.guet.covid_19_visualization.msm.service.MsmService;
+import edu.guet.covid_19_visualization.msm.service.CodeService;
 import edu.guet.covid_19_visualization.msm.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,12 +13,12 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping("/edumsm/msm")
+@RequestMapping("/msm/code")
 @CrossOrigin
-public class MsmController {
+public class CodeController {
 
     @Autowired
-    private MsmService msmService;
+    private CodeService codeService;
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
@@ -38,7 +38,7 @@ public class MsmController {
         Map<String,Object> param = new HashMap<>();
         param.put("code",code);
         //调用service发送短信的方法
-        boolean isSend = msmService.send(param,phone);
+        boolean isSend = codeService.send(param,phone);
         System.out.println(phone+"-"+String.valueOf(isSend));
         if(isSend) {
             //发送成功，把发送成功验证码放到redis里面

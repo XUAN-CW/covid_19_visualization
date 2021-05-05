@@ -7,14 +7,14 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
-import edu.guet.covid_19_visualization.msm.service.MsmService;
+import edu.guet.covid_19_visualization.msm.service.CodeService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
 @Service
-public class MsmServiceImpl implements MsmService {
+public class CodeServiceImpl implements CodeService {
 
     //发送短信的方法
     @Override
