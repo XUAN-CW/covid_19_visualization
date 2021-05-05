@@ -1,12 +1,6 @@
 import request from '@/utils/request'
 
-export function login(data) {
-  return request({
-    url: '/user_center/user/login',
-    method: 'post',
-    data
-  })
-}
+
 
 export default {
   login(data) {
@@ -16,18 +10,24 @@ export default {
       data
     })
   },
-  getInfo(token) {
+  register(data) {
+    return request({
+      url: '/user_center/user/register',
+      method: 'post',
+      data
+    })
+  },
+  getInfo() {
     return request({
       url: '/user_center/user/getUserInfo',
       method: 'get',
-      params: { token }
     })
   },
-  logout() {
+  sendCode(phone) {
     return request({
-      url: '/vue-admin-template/user/logout',
-      method: 'post'
+      url: `/msm/code/send/${phone}`,
+      method: 'get'
     })
-  }
+  },
 }
 

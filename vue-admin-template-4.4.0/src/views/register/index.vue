@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+    <el-form ref="RegisterForm" :model="RegisterForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
         <h3 class="title">Register Form</h3>
@@ -10,27 +10,27 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input ref="mobile" v-model="loginForm.mobile" placeholder="手机号码" name="mobile" type="text" tabindex="1" auto-complete="on" />
+        <el-input ref="mobile" v-model="RegisterForm.mobile" placeholder="手机号码" name="mobile" type="text" tabindex="1" auto-complete="on" />
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
+        <el-input :key="passwordType" ref="password" v-model="RegisterForm.password" :type="passwordType" placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleRegister" />
         <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
 
       <el-form-item>
-        <el-input ref="mobile" v-model="loginForm.verificationCode" style="width:250px;" placeholder="验证码" />
+        <el-input ref="mobile" v-model="RegisterForm.code" style="width:250px;" placeholder="验证码" />
         <span style="float:right;padding-top:3px;padding-right:3px">
-          <el-button type="primary" style="width:80px;">获取</el-button>
+          <el-button type="primary" style="width:80px;" :disabled="!canClick" @click.native.prevent="getCode">{{content}}</el-button>
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Register</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleRegister">Register</el-button>
 
       <div class="tips">
         <span style="margin-right:20px;">mobile: admin</span>
@@ -43,6 +43,7 @@
 
 <script>
 import { validmobile } from '@/utils/validate'
+import userApi from '@/api/user'
 
 export default {
   name: 'Register',
@@ -62,10 +63,10 @@ export default {
       }
     }
     return {
-      loginForm: {
-        mobile: '',
-        password: '',
-        verificationCode: ''
+      RegisterForm: {
+        mobile: '111111111',
+        password: '11111111',
+        code: '11111111'
       },
       loginRules: {
         mobile: [{ required: true, trigger: 'blur', validator: validatemobile }],
@@ -73,7 +74,10 @@ export default {
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      content: '获取',
+      totalTime: 60,
+      canClick: true //添加canClick
     }
   },
   watch: {
@@ -95,22 +99,47 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
-        } else {
-          console.log('error submit!!')
-          return false
+    handleRegister() {
+      userApi.register(this.RegisterForm).then((res) => {
+        console.log(res)
+        if(res.code == 20000){
+          this.$router.push({ path: this.redirect || '/login' })
         }
+      }).catch((err) => {
+        console.log(err)
       })
+    },
+
+    getCode() {
+      this.countDown()
+      userApi.sendCode(this.RegisterForm.mobile)
+        .then(response => {
+          if(response.code == 20000){
+            this.countDown()
+          }
+          this.sending = false
+        })
+    },
+
+    countDown() {
+      let tempTotalTime = this.totalTime
+      let tempContent = this.content
+      if (!this.canClick) return  //改动的是这两行代码
+      this.canClick = false
+      this.content = this.totalTime
+      let clock = window.setInterval(() => {
+        this.totalTime--
+        this.content = this.totalTime
+        if (this.totalTime < 0) {
+          window.clearInterval(clock)
+          this.content = tempContent
+          this.totalTime = tempTotalTime
+          this.canClick = true  //这里重新开启
+        }
+      }, 1000)
     }
+
+
   }
 }
 </script>
