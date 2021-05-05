@@ -10,7 +10,7 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input ref="username" v-model="loginForm.mobile" placeholder="Username" name="mobile" type="text" tabindex="1" auto-complete="on" />
+        <el-input ref="username" v-model="loginForm.mobile" placeholder="手机号码" name="mobile" type="text" tabindex="1" auto-complete="on" />
       </el-form-item>
 
       <el-form-item prop="password">
@@ -25,10 +25,10 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
-      <div class="tips">
+      <!-- <div class="tips">
         <span style="margin-right:20px;">mobile: admin</span>
         <span> password: any</span>
-      </div>
+      </div> -->
 
     </el-form>
   </div>
@@ -58,8 +58,8 @@ export default {
     }
     return {
       loginForm: {
-        mobile: '13520191383',
-        password: '111111'
+        mobile: '',
+        password: ''
       },
       loginRules: {
         mobile: [{ required: true, trigger: 'blur', validator: validateUsername }],

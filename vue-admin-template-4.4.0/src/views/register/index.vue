@@ -32,10 +32,10 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleRegister">Register</el-button>
 
-      <div class="tips">
+      <!-- <div class="tips">
         <span style="margin-right:20px;">mobile: admin</span>
         <span> password: any</span>
-      </div>
+      </div> -->
 
     </el-form>
   </div>
@@ -64,9 +64,9 @@ export default {
     }
     return {
       RegisterForm: {
-        mobile: '111111111',
-        password: '11111111',
-        code: '11111111'
+        mobile: '',
+        password: '',
+        code: ''
       },
       loginRules: {
         mobile: [{ required: true, trigger: 'blur', validator: validatemobile }],
@@ -206,7 +206,7 @@ $light_gray: #eee;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 110px 35px 0;
+    padding: 150px 35px 0;
     margin: 0 auto;
     overflow: hidden;
   }
