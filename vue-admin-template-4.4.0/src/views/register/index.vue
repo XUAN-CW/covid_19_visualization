@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="RegisterForm" :model="RegisterForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+    <el-form ref="RegisterForm" :model="RegisterForm" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
         <h3 class="title">Register Form</h3>
