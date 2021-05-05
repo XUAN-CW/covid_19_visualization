@@ -106,7 +106,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         member.setNickname(nickname);
         member.setPassword(MD5.encrypt(password));//密码需要加密的
         member.setIsDisabled(false);//用户不禁用
-        member.setAvatar("http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoj0hHXhgJNOTSOFsS4uZs8x1ConecaVOB8eIl115xmJZcT4oCicvia7wMEufibKtTLqiaJeanU2Lpg3w/132");
+        member.setAvatar("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=944655705,1145047511&fm=26&gp=0.jpg");
         member.setGmtCreate(new Date());
         member.setGmtModified(new Date());
 

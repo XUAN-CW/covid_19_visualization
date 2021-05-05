@@ -80,14 +80,6 @@ export default {
       canClick: true //添加canClick
     }
   },
-  watch: {
-    $route: {
-      handler: function (route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
-  },
   methods: {
     showPwd() {
       if (this.passwordType === 'password') {
