@@ -14,7 +14,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.mapData)
     if (this.mapData.length > 0) {
       this.myEcharts();
     }
@@ -22,7 +21,6 @@ export default {
 
   methods: {
     myEcharts() {
-      console.log(this.mapData)
       // 基于准备好的dom，初始化echarts实例
       var myChart = this.$echarts.init(document.getElementById("pie4"));
       let legendData = [];
