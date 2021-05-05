@@ -82,7 +82,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         System.out.println(registerVo);
         //非空判断
         if(StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)
-                || StringUtils.isEmpty(code) || StringUtils.isEmpty(nickname)) {
+                || StringUtils.isEmpty(code)) {
             return "注册失败";
         }
         //判断验证码
