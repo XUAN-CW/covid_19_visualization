@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
@@ -51,5 +52,17 @@ public class JwtUtils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 根据token字符串获取会员id
+     * @param jwtToken
+     * @return
+     */
+    public static String getUserIdByJwtToken(String jwtToken) {
+        if(StringUtils.isEmpty(jwtToken)) return null;
+        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(jwtToken);
+        Claims claims = claimsJws.getBody();
+        return (String)claims.get("id");
     }
 }
