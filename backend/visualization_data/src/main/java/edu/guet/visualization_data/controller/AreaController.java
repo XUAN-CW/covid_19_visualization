@@ -7,6 +7,7 @@ import edu.guet.visualization_data.entity.vo.AreaWithChildren;
 import edu.guet.visualization_data.mapper.AreaMapper;
 import edu.guet.visualization_data.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +26,7 @@ import java.util.List;
  * @author xuan
  * @since 2021-05-02
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/visualization_data/area")
 public class AreaController {
