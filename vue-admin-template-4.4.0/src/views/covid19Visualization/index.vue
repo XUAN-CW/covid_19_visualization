@@ -10,6 +10,8 @@
     </router-link>
     <Overview :today="show.currentAreaTypes[0]" :yesterday="show.currentAreaTypes[1]"></Overview>
     <ChinaMap :selectedArea="currentAreaName" :mapData="show.chinaMapDataBycurrentType" :key="JSON.stringify(show.chinaMapDataBycurrentType)"></ChinaMap>
+    <roma :generalSituation="show.areaCaseOnAWeek" :checked="currentType" :key="JSON.stringify(show.areaCaseOnAWeek) + 3"></roma>
+    
     <Pie4 :mapData="show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType" :key="JSON.stringify(show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType)+1"></Pie4>
     <DetailVisualMapHorizontal :mapData="show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType" :key="JSON.stringify(show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType) + 2"></DetailVisualMapHorizontal>
     </div>
@@ -45,7 +47,8 @@ export default {
         currentArea: [],
         nameAndValueOnCurrentAreaBycurrentType: [],
         currentAreaChildNameAndValueOnCurrentAreaBycurrentType: [],
-        currentAreaTypes: []
+        currentAreaTypes: [],
+        areaCaseOnAWeek:[]
       }
     }
   },
@@ -167,7 +170,17 @@ export default {
       this.show.chinaMapDataBycurrentType = this.weekData[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
       this.show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType = this.show.currentArea[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
       this.show.currentAreaTypes = this.show.currentArea.map(item => this.AreaTypes(item))
+            this.show.areaCaseOnAWeek = this.show.currentArea.map((item) => {
+        return {
+          currentConfir: item.currentConfirm,
+          confirm: item.confirm,
+          suspect: item.suspect,
+          cure: item.cure,
+          dead: item.dead,
+        };
+      });
 
+      console.log(this.show.areaCaseOnAWeek)
     }
   }
 
