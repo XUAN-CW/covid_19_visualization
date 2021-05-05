@@ -8,6 +8,9 @@
     <router-link to="/register">
       register
     </router-link>
+    <Overview :today="show.currentAreaTypes[0]" :yesterday="show.currentAreaTypes[1]"></Overview>
+    <ChinaMap :mapData="show.chinaMapDataBycurrentType" :key="JSON.stringify(show.chinaMapDataBycurrentType)"></ChinaMap>
+
   </div>
 </template>
 
@@ -15,10 +18,21 @@
 import Avatar from '@/layout/components/Avatar'
 import visualizationApi from '@/api/visualization'
 
+import ChinaMap from "./components/ChinaMap";
+import Overview from "./components/Overview";
+import DetailVisualMapHorizontal from "./components/DetailVisualMapHorizontal";
+import Pie4 from "./components/Pie4";
+import Roma from "./components/Roma";
+
 export default {
   name: 'Covid19Visualization',
   components: {
-    Avatar
+    Avatar,
+    ChinaMap,
+    Overview,
+    Roma,
+    DetailVisualMapHorizontal,
+    Pie4,
   },
   data() {
     return {
@@ -29,7 +43,8 @@ export default {
         chinaMapDataBycurrentType: [],
         currentArea: [],
         nameAndValueOnCurrentAreaBycurrentType: [],
-        currentAreaChildNameAndValueOnCurrentAreaBycurrentType: []
+        currentAreaChildNameAndValueOnCurrentAreaBycurrentType: [],
+        currentAreaTypes: []
       }
     }
   },
@@ -37,17 +52,22 @@ export default {
     weekData() {
 
     },
+    currentAreaName() {
+      this.setShow()
+      // console.log(this.show.currentArea)
+    },
+    currentType() {
+      console.log()
+      this.setShow(this.currentType)
+    }
   },
 
 
   created() {
     visualizationApi.queryAWeek().then((res) => {
       this.weekData = res.data.week
-      this.show.currentArea = this.weekData.map(item => this.findCurrentArea(item, this.currentAreaName))
-      this.show.nameAndValueOnCurrentAreaBycurrentType = this.show.currentArea.map((item) => this.areaNameAndValueByCurrentType(item))
-      this.show.chinaMapDataBycurrentType = this.weekData[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
-      this.show.nameAndValueOnCurrentAreaBycurrentType = this.show.currentArea[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
-      console.log(this.show.nameAndValueOnCurrentAreaBycurrentType)
+      // console.log(this.show.currentAreaTypes)
+      this.setShow()
     })
   },
 
@@ -118,7 +138,36 @@ export default {
         value: valueType,
       };
     },
+    AreaTypes(item) {
+      return {
+        currentConfirm: item.currentConfirm,
+        confirm: item.confirm,
+        suspect: item.suspect,
+        cure: item.cure,
+        dead: item.dead,
+      };
+    },
 
+
+
+
+
+    setCurrentArea(areaName) {
+      this.currentAreaName = areaName
+    },
+    setCurrentType(type){
+      this.currentType=type
+    },
+
+
+    setShow() {
+      this.show.currentArea = this.weekData.map(item => this.findCurrentArea(item, this.currentAreaName))
+      this.show.nameAndValueOnCurrentAreaBycurrentType = this.show.currentArea.map((item) => this.areaNameAndValueByCurrentType(item))
+      this.show.chinaMapDataBycurrentType = this.weekData[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
+      this.show.nameAndValueOnCurrentAreaBycurrentType = this.show.currentArea[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
+      this.show.currentAreaTypes = this.show.currentArea.map(item => this.AreaTypes(item))
+
+    }
   }
 
 
