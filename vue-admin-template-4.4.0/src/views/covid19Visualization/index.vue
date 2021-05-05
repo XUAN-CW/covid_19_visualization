@@ -1,13 +1,7 @@
 <template>
   <div>
-    <!-- <Avatar></Avatar> -->
-    <h1>疫情数据可视化主页面</h1>
-    <router-link to="/login">
-      login
-    </router-link>
-    <router-link to="/register">
-      register
-    </router-link>
+    <Avatar></Avatar>
+
     <Overview :today="show.currentAreaTypes[0]" :yesterday="show.currentAreaTypes[1]"></Overview>
     <ChinaMap :selectedArea="currentAreaName" :mapData="show.chinaMapDataBycurrentType" :key="JSON.stringify(show.chinaMapDataBycurrentType)"></ChinaMap>
     <roma :generalSituation="show.areaCaseOnAWeek" :checked="currentType" :key="JSON.stringify(show.areaCaseOnAWeek) + 3"></roma>
@@ -180,7 +174,7 @@ export default {
         };
       });
 
-      console.log(this.show.areaCaseOnAWeek)
+      // console.log(this.show.areaCaseOnAWeek)
     }
   }
 

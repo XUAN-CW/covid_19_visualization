@@ -1,22 +1,32 @@
 <template>
 
   <div class="right-menu">
-    <el-dropdown class="avatar-container" trigger="click">
-      <div class="avatar-wrapper">
-        <img :src="avatar" class="user-avatar">
-        <i class="el-icon-caret-bottom" />
-      </div>
-      <el-dropdown-menu slot="dropdown" class="user-dropdown">
-        <router-link to="/home">
-          <el-dropdown-item>
-            Home
+    <div v-if="!isLogin">
+      <router-link to="/login">
+        登录
+      </router-link>
+      <router-link to="/register">
+        注册
+      </router-link>
+    </div>
+    <div v-if="isLogin">
+      <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
+          <img :src="avatar" class="user-avatar">
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <router-link to="/home">
+            <el-dropdown-item>
+              Home
+            </el-dropdown-item>
+          </router-link>
+          <el-dropdown-item @click.native="logout">
+            <span style="display:block;">退出</span>
           </el-dropdown-item>
-        </router-link>
-        <el-dropdown-item @click.native="logout">
-          <span style="display:block;">Log Out</span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
@@ -25,13 +35,15 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import userApi from '@/api/user'
+import Cookies from 'js-cookie'
 
 
 export default {
 
   data() {
     return {
-      avatar: ''
+      avatar: '',
+      isLogin: false
     }
   },
   components: {
@@ -45,16 +57,9 @@ export default {
   },
 
   created() {
-    userApi.getInfo().then(response => {
-      if (response.code == 20000) {
-        console.log(response)
-        this.avatar = response.data.userInfo.avatar
-      } else {
-        console.log(response)
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
+    this.isLogin = (Cookies.get('token') != null)
+
+    this.getInfoByToken()
   },
 
   methods: {
@@ -64,6 +69,25 @@ export default {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/?redirect=${this.$route.fullPath}`)
+    },
+    getInfoByToken() {
+      if (this.isLogin) {
+        userApi.getInfo().then(response => {
+          if (response.code == 20000) {
+            console.log(response)
+            this.avatar = response.data.userInfo.avatar
+          } else {
+            console.log(response)
+          }
+        }).catch((err) => {
+          console.log(err)
+        })
+      }
+    },
+    logout(){
+      Cookies.remove('token');
+      this.isLogin=!this.isLogin
+      this.$router.push({ path: this.redirect || '/' })
     }
   }
 }
