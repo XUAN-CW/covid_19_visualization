@@ -25,7 +25,6 @@ export default {
   },
   data() {
     return {
-      lastSelected: '',
     };
   },
   mounted() {
@@ -104,15 +103,17 @@ export default {
       myChart.setOption(options);
       let that = this
       myChart.on('click', function (params) {
-        if (this.lastSelected == params.data.name) {
-          this.lastSelected = "中国"
-
+        // console.log(that.selectedArea+params.data.name)
+        if (that.selectedArea == params.data.name) {
+          // this.lastSelected = "中国"
+          that.set_show_area("中国");
         } else {
-          this.lastSelected = params.data.name;
+          that.set_show_area(params.data.name);
+          // that.set_show_area("中国");
         }
         // console.log(this.$parent)
         // console.log(this)
-        that.set_show_area(this.lastSelected);
+        // that.set_show_area(this.lastSelected);
       });
 
       // this.set_show_area("广西");
