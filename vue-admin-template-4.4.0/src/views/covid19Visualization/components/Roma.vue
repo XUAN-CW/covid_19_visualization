@@ -37,7 +37,7 @@ export default {
 
       let legendData = Object.keys(this.generalSituation[0])
 
-      console.log(legendData)
+      // console.log(legendData)
 
       let seriesItems = [];
       for (let i = 0; i < legendData.length; i++) {
@@ -76,7 +76,7 @@ export default {
           }
         }
       }
-      console.log(seriesItems)
+      // console.log(seriesItems)
 
       let xAxisData = [];
       for (let i = this.generalSituation.length - 1; i > 0; i--) {
