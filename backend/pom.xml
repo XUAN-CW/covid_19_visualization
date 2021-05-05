@@ -14,6 +14,7 @@
         <module>msm</module>
         <module>user_center</module>
         <module>visualization_data</module>
+        <module>crawler</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
