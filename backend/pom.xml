@@ -13,6 +13,7 @@
         <module>helper</module>
         <module>msm</module>
         <module>user_center</module>
+        <module>visualization_data</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

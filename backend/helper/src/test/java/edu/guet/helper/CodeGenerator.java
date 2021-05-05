@@ -29,6 +29,7 @@ public class CodeGenerator {
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setOutputDir("D:\\core\\java\\MyProject\\covid_19_visualization\\backend\\user_center\\src\\main\\java");
+        gc.setOutputDir("D:\\core\\java\\MyProject\\covid_19_visualization\\backend\\visualization_data\\src\\main\\java");
         gc.setAuthor("xuan");
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
@@ -50,7 +51,7 @@ public class CodeGenerator {
         // 4、包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("edu.guet");
-        pc.setModuleName("user_center"); //模块名
+        pc.setModuleName("visualization_data"); //模块名
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
