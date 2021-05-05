@@ -10,7 +10,7 @@
     </router-link>
     <Overview :today="show.currentAreaTypes[0]" :yesterday="show.currentAreaTypes[1]"></Overview>
     <ChinaMap :selectedArea="currentAreaName" :mapData="show.chinaMapDataBycurrentType" :key="JSON.stringify(show.chinaMapDataBycurrentType)"></ChinaMap>
-
+    <Pie4 :mapData="show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType" :key="JSON.stringify(show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType)+1"></Pie4>
   </div>
 </template>
 
@@ -155,8 +155,8 @@ export default {
     setCurrentArea(areaName) {
       this.currentAreaName = areaName
     },
-    setCurrentType(type){
-      this.currentType=type
+    setCurrentType(type) {
+      this.currentType = type
     },
 
 
@@ -164,7 +164,7 @@ export default {
       this.show.currentArea = this.weekData.map(item => this.findCurrentArea(item, this.currentAreaName))
       this.show.nameAndValueOnCurrentAreaBycurrentType = this.show.currentArea.map((item) => this.areaNameAndValueByCurrentType(item))
       this.show.chinaMapDataBycurrentType = this.weekData[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
-      this.show.nameAndValueOnCurrentAreaBycurrentType = this.show.currentArea[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
+      this.show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType = this.show.currentArea[0].children.map(item => this.areaNameAndValueByCurrentType(item, this.currentAreaName))
       this.show.currentAreaTypes = this.show.currentArea.map(item => this.AreaTypes(item))
 
     }
