@@ -11,7 +11,8 @@
     <Overview :today="show.currentAreaTypes[0]" :yesterday="show.currentAreaTypes[1]"></Overview>
     <ChinaMap :selectedArea="currentAreaName" :mapData="show.chinaMapDataBycurrentType" :key="JSON.stringify(show.chinaMapDataBycurrentType)"></ChinaMap>
     <Pie4 :mapData="show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType" :key="JSON.stringify(show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType)+1"></Pie4>
-  </div>
+    <DetailVisualMapHorizontal :mapData="show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType" :key="JSON.stringify(show.currentAreaChildNameAndValueOnCurrentAreaBycurrentType) + 2"></DetailVisualMapHorizontal>
+    </div>
 </template>
 
 <script>
