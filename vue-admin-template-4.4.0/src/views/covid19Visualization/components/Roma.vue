@@ -37,6 +37,7 @@ export default {
 
       let legendData = Object.keys(this.generalSituation[0])
 
+      console.log(legendData)
 
       let seriesItems = [];
       for (let i = 0; i < legendData.length; i++) {
@@ -48,14 +49,34 @@ export default {
         };
         seriesItems.push(seriesItem);
       }
+      // console.log(this.generalSituation)
 
       for (let i = this.generalSituation.length - 1; i >= 0; i--) {
-        seriesItems[0].data.push(this.generalSituation[i].currentConfirm);
-        seriesItems[1].data.push(this.generalSituation[i].confirm);
-        seriesItems[2].data.push(this.generalSituation[i].cure);
-        seriesItems[3].data.push(this.generalSituation[i].dead);
-        seriesItems[4].data.push(this.generalSituation[i].suspecte);
+
+        for (let j = seriesItems.length - 1; j >= 0; j--) {
+
+          switch (seriesItems[j].name) {
+            case "currentConfirm":
+              seriesItems[j].data.push(this.generalSituation[i].currentConfirm);
+              break;
+            case "confirm":
+              seriesItems[j].data.push(this.generalSituation[i].confirm);
+              break;
+            case "suspect":
+              seriesItems[j].data.push(this.generalSituation[i].suspect);
+              break;
+            case "cure":
+              seriesItems[j].data.push(this.generalSituation[i].cure);
+              break;
+            case "dead":
+              seriesItems[j].data.push(this.generalSituation[i].dead);
+              break
+            default:
+              break;
+          }
+        }
       }
+      console.log(seriesItems)
 
       let xAxisData = [];
       for (let i = this.generalSituation.length - 1; i > 0; i--) {

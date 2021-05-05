@@ -166,7 +166,7 @@ export default {
       this.show.currentAreaTypes = this.show.currentArea.map(item => this.AreaTypes(item))
             this.show.areaCaseOnAWeek = this.show.currentArea.map((item) => {
         return {
-          currentConfir: item.currentConfirm,
+          currentConfirm: item.currentConfirm,
           confirm: item.confirm,
           suspect: item.suspect,
           cure: item.cure,
