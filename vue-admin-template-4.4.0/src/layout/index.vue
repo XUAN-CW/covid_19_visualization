@@ -14,8 +14,18 @@
 <script>
 import { Navbar, Sidebar, AppMain } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
-
+import Cookies from 'js-cookie'
 export default {
+    // 局部路由守卫
+        beforeRouteEnter (to,from,next) {
+            
+            if(Cookies.get('token')!=null) {
+                next();
+            }else {
+                console.log('局部路由');
+               next('/login');
+            }
+        },
   name: 'Layout',
   components: {
     Navbar,
