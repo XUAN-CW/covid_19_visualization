@@ -21,6 +21,7 @@ export default {
   name: "Echarts",
   props: {
     mapData: {},
+    selectedArea: {}
   },
   data() {
     return {
@@ -58,6 +59,10 @@ export default {
           aspectScale: 0.75,
           zoom: 1.25,
           selectedMode: "single",
+          regions: [{
+            name: this.selectedArea,
+            selected: true,
+          }],
           label: {
             show: true,
             formatter: "{a}",

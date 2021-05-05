@@ -9,7 +9,7 @@
       register
     </router-link>
     <Overview :today="show.currentAreaTypes[0]" :yesterday="show.currentAreaTypes[1]"></Overview>
-    <ChinaMap :mapData="show.chinaMapDataBycurrentType" :key="JSON.stringify(show.chinaMapDataBycurrentType)"></ChinaMap>
+    <ChinaMap :selectedArea="currentAreaName" :mapData="show.chinaMapDataBycurrentType" :key="JSON.stringify(show.chinaMapDataBycurrentType)"></ChinaMap>
 
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       weekData: [], //一周的数据
-      currentAreaName: '河南',
+      currentAreaName: '中国',
       currentType: 'confirm',
       show: {
         chinaMapDataBycurrentType: [],
