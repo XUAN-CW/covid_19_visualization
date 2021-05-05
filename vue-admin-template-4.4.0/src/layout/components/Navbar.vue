@@ -4,24 +4,7 @@
 
     <breadcrumb class="breadcrumb-container" />
 
-    <div class="right-menu">
-      <el-dropdown class="avatar-container" trigger="click">
-        <div class="avatar-wrapper">
-          <img :src="avatar" class="user-avatar">
-          <i class="el-icon-caret-bottom" />
-        </div>
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/home">
-            <el-dropdown-item>
-              Home
-            </el-dropdown-item>
-          </router-link>
-          <el-dropdown-item @click.native="logout">
-            <span style="display:block;">Log Out</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </div>
+    <Avatar></Avatar>
   </div>
 </template>
 
@@ -30,6 +13,7 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import userApi from '@/api/user'
+import Avatar from '@/layout/components/Avatar'
 
 
 export default {
@@ -41,7 +25,8 @@ export default {
   },
   components: {
     Breadcrumb,
-    Hamburger
+    Hamburger,
+    Avatar
   },
   computed: {
     ...mapGetters([
