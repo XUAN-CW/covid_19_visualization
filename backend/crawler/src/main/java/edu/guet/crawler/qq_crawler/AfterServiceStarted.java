@@ -1,6 +1,8 @@
 package edu.guet.crawler.qq_crawler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import edu.guet.crawler.entity.Area;
 import edu.guet.crawler.entity.vo.AreaWithChildren;
 import edu.guet.crawler.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +37,16 @@ public class AfterServiceStarted implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         while (true){
-            System.out.println(new Date());
+            QueryWrapper<Area> queryWrapper = new QueryWrapper<>();
             AreaWithChildren areaWithChildren = covidInChina.currentChinaData();
-            System.out.println("covidInChina:"+JSONObject.toJSONString(areaWithChildren));
-            areaService.insertAreaWithChildren(areaWithChildren);
-            break;
+            queryWrapper.ge("updateTime", areaWithChildren.getUpdateTime());
+
+            if(areaService.list(queryWrapper).isEmpty()){
+                areaService.insertAreaWithChildren(areaWithChildren);
+            }else {
+                System.out.println("本数据更新日期不大于数据库中最新数据");
+            }
+            Thread.sleep(1000*60);
         }
     }
 
