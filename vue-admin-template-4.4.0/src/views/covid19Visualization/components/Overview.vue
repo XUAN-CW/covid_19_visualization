@@ -45,6 +45,7 @@ export default {
   props: {
     today: {},
     yesterday: {},
+    currentType: ''
   },
   data() {
     return {
@@ -57,7 +58,7 @@ export default {
       // console.log(e.currentTarget.getAttribute("lable"))// 当前元素
       this.set_covidTypeHelper(e.currentTarget.getAttribute("lable"))
     },
-    set_covidTypeHelper(covidType){
+    set_covidTypeHelper(covidType) {
       this.$parent.setCurrentType(covidType)
     }
   },
@@ -70,10 +71,17 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
 .overviewBox:hover {
   background-color: whitesmoke;
   border-radius: 20px;
 }
+
+.selected {
+  background-color: red;
+  border-radius: 20px;
+}
+
 .overviewBox_number {
   font-size: 25px;
   padding-top: 5px;

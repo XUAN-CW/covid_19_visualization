@@ -44,12 +44,12 @@ export default {
             color: "red",
             fontWeight: "bold",
           },
-          subtext: "数据来自于百度",
+          subtext: "数据来自于QQ",
           subtextStyle: {
             color: "#aaa",
             fontWeight: "italic",
           },
-          sublink: "https://voice.baidu.com/act/newpneumonia/newpneumonia/",
+          sublink: "https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5",
           left: "center",
         },
         geo: {
