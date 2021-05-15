@@ -13,4 +13,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan("edu.guet.report.mapper")
 public class MybatisPlusConfig {
+
 }

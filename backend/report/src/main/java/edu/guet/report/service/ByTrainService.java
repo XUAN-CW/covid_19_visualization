@@ -1,6 +1,6 @@
 package edu.guet.report.service;
 
-import edu.guet.report.entity.Report;
+import edu.guet.report.entity.ByTrain;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author xuan
  * @since 2021-05-15
  */
-public interface ReportService extends IService<Report> {
+public interface ByTrainService extends IService<ByTrain> {
 
 }

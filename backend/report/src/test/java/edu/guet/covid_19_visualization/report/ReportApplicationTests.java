@@ -1,7 +1,7 @@
 package edu.guet.covid_19_visualization.report;
 
 import edu.guet.report.ReportApplication;
-import edu.guet.report.mapper.ReportMapper;
+import edu.guet.report.mapper.ByTrainMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ReportApplicationTests {
 
     @Autowired
-    ReportMapper reportMapper;
+    ByTrainMapper reportMapper;
 
     @Test
     void contextLoads() {

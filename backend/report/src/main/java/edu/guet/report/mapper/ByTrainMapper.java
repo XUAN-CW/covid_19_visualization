@@ -1,8 +1,7 @@
 package edu.guet.report.mapper;
 
-import edu.guet.report.entity.Report;
+import edu.guet.report.entity.ByTrain;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -12,7 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author xuan
  * @since 2021-05-15
  */
-@Mapper
-public interface ReportMapper extends BaseMapper<Report> {
+public interface ByTrainMapper extends BaseMapper<ByTrain> {
 
 }
