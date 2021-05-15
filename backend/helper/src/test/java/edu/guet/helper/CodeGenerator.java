@@ -28,8 +28,7 @@ public class CodeGenerator {
 
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("D:\\core\\java\\MyProject\\covid_19_visualization\\backend\\user_center\\src\\main\\java");
-        gc.setOutputDir("D:\\core\\java\\MyProject\\covid_19_visualization\\backend\\visualization_data\\src\\main\\java");
+        gc.setOutputDir("D:\\core\\java\\MyProject\\covid_19_visualization\\backend\\report\\src\\main\\java");
         gc.setAuthor("xuan");
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
@@ -41,7 +40,7 @@ public class CodeGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/covid?serverTimezone=GMT%2B8&characterEncoding=utf-8");
+        dsc.setUrl("jdbc:mysql://47.102.200.197:3306/covid?serverTimezone=GMT%2B8&characterEncoding=utf-8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
@@ -51,7 +50,7 @@ public class CodeGenerator {
         // 4、包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("edu.guet");
-        pc.setModuleName("visualization_data"); //模块名
+        pc.setModuleName("report"); //模块名
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
@@ -60,7 +59,7 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("user");
+        strategy.setInclude("report");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
