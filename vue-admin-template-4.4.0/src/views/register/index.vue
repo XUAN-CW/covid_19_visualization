@@ -13,6 +13,13 @@
         <el-input ref="mobile" v-model="RegisterForm.mobile" placeholder="手机号码" name="mobile" type="text" tabindex="1" auto-complete="on" />
       </el-form-item>
 
+      <el-form-item prop="mobile">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input ref="mobile" v-model="RegisterForm.mail" placeholder="邮箱" name="mobile" type="text" tabindex="1" auto-complete="on" />
+      </el-form-item>
+
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
@@ -66,6 +73,7 @@ export default {
       RegisterForm: {
         mobile: '',
         password: '',
+        mail: '',
         code: ''
       },
       loginRules: {
@@ -94,7 +102,7 @@ export default {
     handleRegister() {
       userApi.register(this.RegisterForm).then((res) => {
         console.log(res)
-        if(res.code == 20000){
+        if (res.code == 20000) {
           this.$router.push({ path: this.redirect || '/login' })
         }
       }).catch((err) => {
@@ -106,7 +114,7 @@ export default {
       this.countDown()
       userApi.sendCode(this.RegisterForm.mobile)
         .then(response => {
-          if(response.code == 20000){
+          if (response.code == 20000) {
             this.countDown()
           }
           this.sending = false
@@ -198,7 +206,7 @@ $light_gray: #eee;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 150px 35px 0;
+    padding: 100px 35px 0;
     margin: 0 auto;
     overflow: hidden;
   }

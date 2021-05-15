@@ -45,6 +45,7 @@ public class UserController {
 
     @PostMapping("register")
     public R registerUser(@RequestBody RegisterVo registerVo) {
+        System.out.println(registerVo);
         String registerInfo = memberService.register(registerVo);
         if("OK".equals(registerInfo)){
             return R.ok();

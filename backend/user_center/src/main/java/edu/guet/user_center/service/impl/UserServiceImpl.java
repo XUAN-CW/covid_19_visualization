@@ -103,6 +103,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //数据添加数据库中
         User member = new User();
         member.setMobile(mobile);
+        member.setMail(registerVo.getMail());
         member.setNickname(nickname);
         member.setPassword(MD5.encrypt(password));//密码需要加密的
         member.setIsDisabled(false);//用户不禁用
