@@ -47,6 +47,12 @@ public class ByTrain implements Serializable {
      */
     private Date departureTime;
 
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
     /**
      * 是否确诊
      */

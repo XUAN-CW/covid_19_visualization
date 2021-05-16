@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.net.ConnectException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,6 +50,7 @@ public class ByTrainController {
             byTrain.setSeat(byTrainVO.getSeat());
             byTrain.setIsInfect(byTrainVO.getIsInfect());
             byTrain.setDepartureTime(byTrainVO.getDepartureTime());
+            byTrain.setCreateTime(new Date());
             byTrainService.save(byTrain);
             // 如果是确诊的，应当通知同车次的人
             if(byTrainVO.getIsInfect()){
