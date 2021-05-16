@@ -12,7 +12,7 @@
         <module>common</module>
         <module>helper</module>
         <module>msm</module>
-        <module>user_center</module>
+        <module>user</module>
         <module>visualization_data</module>
         <module>crawler</module>
         <module>report</module>
