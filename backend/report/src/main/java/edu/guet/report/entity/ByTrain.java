@@ -42,22 +42,13 @@ public class ByTrain implements Serializable {
      */
     private String seat;
 
-    /**
-     * 发车时间
-     */
-    private Date departureTime;
-
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+    private Long departureTime;
 
     /**
      * 是否确诊
      */
     private Boolean isInfect;
 
-
+    private Date createTime;
 
 }

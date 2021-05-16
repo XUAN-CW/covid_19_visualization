@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.net.ConnectException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +28,7 @@ import java.util.List;
  * @author xuan
  * @since 2021-05-15
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/report/by-train")
 public class ByTrainController {
@@ -35,26 +38,18 @@ public class ByTrainController {
 
 
     // 上报
-    @PostMapping("ByTrain")
-    public R train(@RequestBody ByTrainVO byTrainVO, HttpServletRequest request){
+    @PostMapping("byTrain")
+    public R train(@RequestBody ByTrainVO byTrainVO, HttpServletRequest request) throws ParseException {
         //调用jwt工具类的方法。根据request对象获取头信息，返回用户id
         String token = request.getHeader("token");
         String userId = JwtUtils.getUserIdByJwtToken(token);
         if(null==userId){
             return R.error();
         }else {
-            ByTrain byTrain = new ByTrain();
-            byTrain.setUid(userId);
-            byTrain.setTrain(byTrainVO.getTrain());
-            byTrain.setCoach(byTrainVO.getCoach());
-            byTrain.setSeat(byTrainVO.getSeat());
-            byTrain.setIsInfect(byTrainVO.getIsInfect());
-            byTrain.setDepartureTime(byTrainVO.getDepartureTime());
-            byTrain.setCreateTime(new Date());
-            byTrainService.save(byTrain);
+            byTrainService.saveByTrainVO(userId,byTrainVO);
             // 如果是确诊的，应当通知同车次的人
             if(byTrainVO.getIsInfect()){
-                byTrainService.notifyOtherPassengers(userId,byTrainVO.getTrain(),byTrainVO.getDepartureTime());
+                byTrainService.notifyOtherPassengers(userId,byTrainVO.getTrain(),new Date(byTrainVO.getDepartureTime()));
             }
             return R.ok();
         }

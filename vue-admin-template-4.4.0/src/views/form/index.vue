@@ -1,43 +1,28 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="Activity name">
-        <el-input v-model="form.name" />
+    <el-form ref="report" :model="report" label-width="120px">
+      <el-form-item label="车次">
+        <el-input v-model="report.train" />
       </el-form-item>
-      <el-form-item label="Activity zone">
-        <el-select v-model="form.region" placeholder="please select your zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
+      <el-form-item label="车厢">
+        <el-input v-model="report.coach" />
+      </el-form-item>
+      <el-form-item label="座位">
+        <el-input v-model="report.seat" />
+      </el-form-item>
+
+      <el-form-item label="发车时间">
+        <div class="block">
+          <el-date-picker format="yyyy-MM-dd HH:mm" value-format="timestamp" v-model="report.departureTime" type="datetime" placeholder="选择日期时间">
+          </el-date-picker>
+        </div>
+      </el-form-item>
+
+      <el-form-item label="是否感染">
+        <el-select v-model="report.isInfect" placeholder="please select your zone">
+          <el-option label="未感染" value="false" />
+          <el-option label="已感染" value="true" />
         </el-select>
-      </el-form-item>
-      <el-form-item label="Activity time">
-        <el-col :span="11">
-          <el-date-picker v-model="form.date1" type="date" placeholder="Pick a date" style="width: 100%;" />
-        </el-col>
-        <el-col :span="2" class="line">-</el-col>
-        <el-col :span="11">
-          <el-time-picker v-model="form.date2" type="fixed-time" placeholder="Pick a time" style="width: 100%;" />
-        </el-col>
-      </el-form-item>
-      <el-form-item label="Instant delivery">
-        <el-switch v-model="form.delivery" />
-      </el-form-item>
-      <el-form-item label="Activity type">
-        <el-checkbox-group v-model="form.type">
-          <el-checkbox label="Online activities" name="type" />
-          <el-checkbox label="Promotion activities" name="type" />
-          <el-checkbox label="Offline activities" name="type" />
-          <el-checkbox label="Simple brand exposure" name="type" />
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="Resources">
-        <el-radio-group v-model="form.resource">
-          <el-radio label="Sponsor" />
-          <el-radio label="Venue" />
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="Activity form">
-        <el-input v-model="form.desc" type="textarea" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">Create</el-button>
@@ -48,24 +33,32 @@
 </template>
 
 <script>
+
+import reportApi from '@/api/report'
 export default {
   data() {
     return {
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+
+      departureTimeTemp: {
+        date: '',
+        time: ''
+      },
+      report: {
+        train: '',
+        coach: '',
+        seat: '',
+        departureTime: '',
+        isInfect: 'false'
+      },
     }
   },
   methods: {
     onSubmit() {
-      this.$message('submit!')
+      reportApi.byTrain(this.report).then(response => {
+        console.log(response)
+      }).catch((err) => {
+        console.log(err)
+      })
     },
     onCancel() {
       this.$message({
@@ -78,7 +71,7 @@ export default {
 </script>
 
 <style scoped>
-.line{
+.line {
   text-align: center;
 }
 </style>

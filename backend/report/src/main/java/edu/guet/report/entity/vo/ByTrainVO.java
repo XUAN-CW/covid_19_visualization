@@ -22,7 +22,7 @@ public class ByTrainVO {
     /**
      * 发车时间
      */
-    private Date departureTime;
+    private Long departureTime;
 
     /**
      * 车厢
