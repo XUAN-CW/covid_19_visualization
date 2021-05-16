@@ -1,8 +1,8 @@
 package edu.guet.report.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -43,9 +43,15 @@ public class ByTrain implements Serializable {
     private String seat;
 
     /**
+     * 发车时间
+     */
+    private Date departureTime;
+
+    /**
      * 是否确诊
      */
     private Boolean isInfect;
+
 
 
 }

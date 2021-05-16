@@ -1,8 +1,10 @@
 package edu.guet.covid_19_visualization.report;
 
 import edu.guet.report.ReportApplication;
+import edu.guet.report.api.UserMailMQ;
 import edu.guet.report.mapper.ByTrainMapper;
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -11,11 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ReportApplicationTests {
 
     @Autowired
-    ByTrainMapper reportMapper;
+    RabbitTemplate rabbitTemplate;
 
     @Test
     void contextLoads() {
-        System.out.println(reportMapper.selectList(null));
+
+        rabbitTemplate.convertAndSend(UserMailMQ.EDU_GUET_USER_MAIL_EXCHANGE,"","userId");
+
     }
 
 }

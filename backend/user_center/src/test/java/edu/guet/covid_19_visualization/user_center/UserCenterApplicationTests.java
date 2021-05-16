@@ -1,6 +1,6 @@
 package edu.guet.covid_19_visualization.user_center;
 
-import edu.guet.user_center.UserCenterApplication;
+import edu.guet.UserCenterApplication;
 import edu.guet.user_center.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
