@@ -55,7 +55,9 @@ export default {
   methods: {
     onSubmit() {
       reportApi.byTrain(this.report).then(response => {
-        console.log(response)
+        if(response.code == 20000){
+          this.$router.push( '/home')
+        }
       }).catch((err) => {
         console.log(err)
       })

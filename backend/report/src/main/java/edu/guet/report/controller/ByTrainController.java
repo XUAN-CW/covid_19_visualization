@@ -68,7 +68,7 @@ public class ByTrainController {
             queryWrapper.eq("uid", userId);
             //查询数据库根据用户id获取用户信息
             List<ByTrain> byTrainList = byTrainService.list(queryWrapper);
-            return R.ok().data("byTrainHistory",byTrainList);
+            return R.ok().data("byTrainHistoryList",byTrainList);
         }
     }
 
