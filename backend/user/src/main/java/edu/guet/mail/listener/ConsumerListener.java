@@ -56,6 +56,7 @@ public class ConsumerListener {
         //邮件正文
         message.setText(msg);
         javaMailSender.send(message);
+
     }
 
 }

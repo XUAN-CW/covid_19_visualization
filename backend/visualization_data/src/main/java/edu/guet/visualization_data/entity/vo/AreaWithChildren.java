@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 public class AreaWithChildren extends Area {
-    List<AreaWithChildren> children;
+    private List<AreaWithChildren> children;
     public AreaWithChildren(Area area){
         setId(area.getId());
         setName(area.getName());

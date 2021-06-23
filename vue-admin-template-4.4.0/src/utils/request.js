@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://localhost:8800/', // url = base url + request url
+  baseURL: 'http://192.168.18.10:8800/', // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
